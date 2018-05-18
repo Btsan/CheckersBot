@@ -1,0 +1,25 @@
+body{
+	background: black;
+	color: white;
+	font-family: "Gotham", sans-serif;
+}
+canvas{
+	margin: 0.5cm;
+}
+div{
+	background-color: #262626;
+	border-width: 0.25cm;
+	border-radius: 0.5cm;
+	border-style: solid;
+	padding: 0 0.75cm;
+	max-width: 720px;
+}
+p{
+	text-align: left;
+}
+li{
+	text-align: left;
+}
+a{
+	color: #00ffff;
+}

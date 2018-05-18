@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkers Net</title>
+	<link rel="stylesheet" type="text/css" href="checkers.css">
+</head>
+<body>
+	<center>
+		<canvas id="checkers" width="720" height="720">There's supposed to be a code demo here, but your browser is either outdated or has JavaScript disabled.</canvas>
+		<div>
+			<h2>American Checkers</h2>
+			<p>
+				Also, known as English Draughts, this game features an 8x8 board, 24 total board pieces, and 4 types of pieces.
+				Along with the rules, this means that there are <a href="http://webdocs.cs.ualberta.ca/~chinook/databases/checker_positions.html">500,995,484,682,338,672,639</a> legal game states. 
+			</p>
+			<p>
+				<u>Rules:</u>
+				<ul>
+					<li>Regular pieces can only move diagonally forward</li>
+					<li>To capture, a piece <i>jumps</i> over an adjacent enemy piece</li>
+					<li>If a capture can be made, it must be done</li>
+					<li>Multiple captures can be performed in a single turn, but only with one piece</li>
+					<li>King pieces can move both forward and backward</li>
+					<li>Regular pieces are crowned Kings, if they reach the other side of the board</li>
+					<li>A player loses by having all of their pieces captured or not moving during their turn</li>
+				</ul>
+			</p>
+			<p>
+				This AI game agent is a multi-layer perceptron (deep neural network) model. It was initially trained by a weakly supervised learning program, that generated <i>batches</i> of game states for the model to study. Afterwards the model was given to a reinforcement learning program, in which the model improved by playing against itself 100,000 times.
+			</p>
+			<p>
+				<del>The AI demo above and reinforcement learning program do not use any sort of <i>look-ahead</i> algorithm, like <i>MinMax</i>. Otherwise, I fear my laptop would explode.</del>
+				The AI demo above <i>looks-ahead</i> 2 turns, using the <i>MinMax</i> decision algorithm.
+			</p>
+		</div>
+	</center>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script>
+	<!-- <script type="text/javascript" src="model.js"></script> -->
+	<!-- <script type="text/javascript" src="checkers.js"></script> -->
+	<script type="text/javascript" src="compressed.js"></script>
+	<script type="text/javascript">
+		draw_board(board);
+		if (!player) computer_move();
+	</script>
+</body>
+</html>
