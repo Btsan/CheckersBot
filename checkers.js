@@ -267,21 +267,22 @@ function has_capture(targ){
 function computer_move(){
 	try{
 		var boards = generate_next(board); // array of board tensors
-		var min = capturable(boards[0]);
-		for (var i = 1; i < boards.length; ++i){
-			var temp_min = capturable(boards[i]);
-			if ((temp_min + 1) < min){
-				min = temp_min;
-				i = 0;
-			}
-			else if (temp_min == min){
-				continue;
-			}
-			else{
-				boards.splice(i, 1);
-				i -= 1;
-			}
-		}
+		// commented out code that forces careful gameplay
+		// var min = capturable(boards[0]);
+		// for (var i = 1; i < boards.length; ++i){
+		// 	var temp_min = capturable(boards[i]);
+		// 	if ((temp_min + 1) < min){
+		// 		min = temp_min;
+		// 		i = 0;
+		// 	}
+		// 	else if (temp_min == min){
+		// 		continue;
+		// 	}
+		// 	else{
+		// 		boards.splice(i, 1);
+		// 		i -= 1;
+		// 	}
+		// }
 		var next = {score: 0, index: 0};
 		next.score = agent.predict(minmax(to_board(reverse(minmax(to_board(reverse(boards[0])))))));
 		for (var i = 1; i < boards.length; ++i){
