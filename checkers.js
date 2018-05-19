@@ -1,4 +1,4 @@
-const agent = tf.sequential();
+var agent = tf.sequential();
 agent.add(tf.layers.dense({units: 64, useBias: true, activation: 'relu', inputShape:[32]}));
 agent.add(tf.layers.dense({units: 32, useBias: true, activation: 'relu'}));
 agent.add(tf.layers.dense({units: 16, useBias: true, activation: 'relu'}));
@@ -22,8 +22,8 @@ var board = [[0, 1, 0, 1, 0, 1, 0, 1],
 
 var c = document.getElementById("checkers");
 var ctx = c.getContext("2d");
-const length = 720;
-const square = length/8;
+var length = 720;
+var square = length/8;
 
 var player = (Math.random() > 0.5)? true:false;
 var toMove = {row: 0, col: 0};
@@ -130,7 +130,7 @@ function paint_blue(targ){
 function userInterface(ev){
 	if (!player) return;
 	var rect = c.getBoundingClientRect();
-	const click = {x: ev.clientX - rect.left, y: ev.clientY - rect.top};
+	var click = {x: ev.clientX - rect.left, y: ev.clientY - rect.top};
 	var targ = {row: Math.floor(click.y/square), col: Math.floor(click.x/square)};
 
 	var ate = false;
@@ -190,7 +190,7 @@ function userInterface(ev){
 						ate = true;
 					}
 				}
-				else if (targ.row == toMove.row+1){ // move
+				else if (!must && targ.row == toMove.row+1){ // move
 					if (targ.col == toMove.col+1 || targ.col == toMove.col-1){
 						board[targ.row][targ.col] = board[toMove.row][toMove.col];
 						board[toMove.row][toMove.col] = 0;
@@ -212,7 +212,7 @@ function userInterface(ev){
 						ate = true;
 					}
 				}
-				else if (targ.row == toMove.row-1){ // move
+				else if (!must && targ.row == toMove.row-1){ // move
 					if (targ.col == toMove.col+1 || targ.col == toMove.col-1){
 						board[targ.row][targ.col] = board[toMove.row][toMove.col];
 						board[toMove.row][toMove.col] = 0;
