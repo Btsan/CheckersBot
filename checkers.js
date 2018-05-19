@@ -22,6 +22,7 @@ var board = [[0, 1, 0, 1, 0, 1, 0, 1],
 
 var c = document.getElementById("checkers");
 var ctx = c.getContext("2d");
+ctx.lineWidth = 5;
 var length = 720;
 var square = length/8;
 
@@ -66,7 +67,7 @@ function draw_board(b){
 				x = j*square + square/2;
 				if (b[i][j] != 0){
 					ctx.beginPath();
-					ctx.arc(x, y, square/2 - 2, 0, 2*Math.PI);
+					ctx.arc(x, y, square/2 - 4, 0, 2*Math.PI);
 					if (b[i][j] > 0){ // Black
 						if (b[i][j] == 3){
 							ctx.fillStyle = "red";
@@ -96,7 +97,7 @@ function draw_board(b){
 				x = j*square + square/2;
 				if (b[i][j] != 0){
 					ctx.beginPath();
-					ctx.arc(x, y, square/2 - 2, 0, 2*Math.PI);
+					ctx.arc(x, y, square/2 - 4, 0, 2*Math.PI);
 					if (b[i][j] > 0){ // Black
 						if (b[i][j] == 3){
 							ctx.fillStyle = "red";
