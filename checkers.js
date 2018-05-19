@@ -130,7 +130,7 @@ function paint_blue(targ){
 function userInterface(ev){
 	if (!player) return;
 	var rect = c.getBoundingClientRect();
-	var click = {x: ev.clientX - rect.left, y: ev.clientY - rect.top};
+	const click = {x: ev.clientX - rect.left, y: ev.clientY - rect.top};
 	var targ = {row: Math.floor(click.y/square), col: Math.floor(click.x/square)};
 
 	var ate = false;
@@ -241,48 +241,50 @@ function userInterface(ev){
 	}
 }
 function has_capture(targ){
+	var cap = false;
 	switch (board[targ.row][targ.col]){
 		case -3:
 			if (targ.row < 6 && targ.col > 1 && board[targ.row+1][targ.col-1] > 0 && board[targ.row+2][targ.col-2] == 0){ // bot left
 				paint_blue({row: targ.row+2, col: targ.col-2});
-				return true;
+				cap = true;
 			}
 			if (targ.row < 6 && targ.col < 6 && board[targ.row+1][targ.col+1] > 0 && board[targ.row+2][targ.col+2] == 0){ // bot right
 				paint_blue({row: targ.row+2, col: targ.col+2});
-				return true;
+				cap = true;
 			}
 		case -1:
 			if (targ.row > 1 && targ.col > 1 && board[targ.row-1][targ.col-1] > 0 && board[targ.row-2][targ.col-2] == 0){ // top left
 				paint_blue({row: targ.row-2, col: targ.col-2});
-				return true;
+				cap = true;
 			}
 			if (targ.row > 1 && targ.col < 6 && board[targ.row-1][targ.col+1] > 0 && board[targ.row-2][targ.col+2] == 0){ // top right
 				paint_blue({row: targ.row-2, col: targ.col+2});
-				return true;
+				cap = true;
 			}
 			break;
 	}
-	return false;
+	return cap;
 }
 function computer_move(){
 	try{
 		var boards = generate_next(board); // array of board tensors
-		// commented out code that forces careful gameplay
-		// var min = capturable(boards[0]);
-		// for (var i = 1; i < boards.length; ++i){
-		// 	var temp_min = capturable(boards[i]);
-		// 	if ((temp_min + 1) < min){
-		// 		min = temp_min;
-		// 		i = 0;
-		// 	}
-		// 	else if (temp_min == min){
-		// 		continue;
-		// 	}
-		// 	else{
-		// 		boards.splice(i, 1);
-		// 		i -= 1;
-		// 	}
-		// }
+		if (ai_pcs(board) < 6){ // play more careful at the end
+			var min = capturable(boards[0]);
+			for (var i = 1; i < boards.length; ++i){
+				var temp_min = capturable(boards[i]);
+				if ((temp_min) < min){
+					min = temp_min;
+					i = 0;
+				}
+				else if (temp_min == min){
+					continue;
+				}
+				else{
+					boards.splice(i, 1);
+					i -= 1;
+				}
+			}
+		}
 		var next = {score: 0, index: 0};
 		next.score = agent.predict(minmax(to_board(reverse(minmax(to_board(reverse(boards[0])))))));
 		for (var i = 1; i < boards.length; ++i){
@@ -317,6 +319,16 @@ function capturable(t){
 		for (var j = 0; j < 8; ++j)
 			if (b[i][j] > 0)
 				count += count_branches(b, i, j);
+	return count;
+}
+
+function ai_pcs(b){
+	var count = 0;
+	for (var i = 0; i < 8; ++i){
+		for (var j = 0; j < 8; ++j){
+			if (b[i][j] > 0) count++;
+		}
+	}
 	return count;
 }
 
