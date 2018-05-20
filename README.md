@@ -1,7 +1,7 @@
 # CheckersBot
-American Checkers/English Draughts AI
-
 [Play against it](https://havorax.github.io/CheckersBot/)
+
+American Checkers/English Draughts AI
 
 ---
 
