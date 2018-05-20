@@ -125,8 +125,9 @@ function draw_board(b){
 	}
 }
 function paint_blue(targ){
+	requestAnimationFrame(function(){
 	ctx.fillStyle = "blue";
-	ctx.fillRect(targ.col*square, targ.row*square, square, square);
+	ctx.fillRect(targ.col*square, targ.row*square, square, square);});
 }
 function userInterface(ev){
 	if (!player) return;
@@ -222,13 +223,13 @@ function userInterface(ev){
 			}
 			if (targ.row == 0 && board[targ.row][targ.col] == -1){
 				board[targ.row][targ.col] = -3;
-				draw_board(board);
+				requestAnimationFrame(function(){draw_board(board);});
 				player = false;
 				toMove = {row: 0, col: 0};
 				computer_move();
 			}
 			if (board[toMove.row][toMove.col] == 0){
-				draw_board(board);
+				requestAnimationFrame(function(){draw_board(board);});
 				if ((ate && !has_capture(targ)) || !ate){
 					player = false;
 					toMove = {row: 0, col: 0};
@@ -296,7 +297,7 @@ function computer_move(){
 			}
 		}
 		board = to_board(boards[next.index]);
-		draw_board(board);
+		requestAnimationFrame(function(){draw_board(board);});
 		player = true;
 	}
 	catch(err){
