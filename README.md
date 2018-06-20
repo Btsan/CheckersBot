@@ -22,6 +22,8 @@ The MLP model is initially trained with weakly supervised learning:
 
 This implementation ~~was quickly made for turning in to class, shortly after a couple hours~~ is a simplified algorithm of its [inspiration](https://arxiv.org/abs/1605.07723).
 
+Because there are so many [possible game states](http://webdocs.cs.ualberta.ca/~chinook/databases/checker_positions.html), the data is generated in *batches*, learned, and then deleted. This process could be improved by saving game states (perhaps in a SQL database). The saved game states should be game states that are difficult or significant to the agent's learning process.
+
 ## Reinforcement Learning
 
 Finally, while the weakly trained model seemed to able to play checkers, it still could't beat ~~me~~ humans. This was likely because my heuristic label was bad, so I had a few options:
