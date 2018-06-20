@@ -9,6 +9,10 @@ A checkers playing agent that heuristically evaluates a given game state with a 
 
 The implemented neural network model is a multi-layer perceptron (MLP). The [demo AI](https://havorax.github.io/CheckersBot/) was initially trained with weakly supervised learning and further trained with reinforcement learning, by playing against itself.
 
+<img src="checkers.png" alt="Image of web demo being played"></img>
+
+*Figure: [demo](https://havorax.github.io/CheckersBot/) being played. AI (red) sacrifices a piece to break the player's formation.*
+
 ## Weakly Supervised Learning
 
 The MLP model is initially trained with weakly supervised learning:
