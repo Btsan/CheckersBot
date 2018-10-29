@@ -28,6 +28,8 @@ This implementation ~~was quickly made for turning in to class, shortly after a 
 
 Because there are so many [possible game states](http://webdocs.cs.ualberta.ca/~chinook/databases/checker_positions.html), the data is generated in *batches*, learned, and then deleted. This process could be improved by saving game states (perhaps in a SQL database). The saved game states should be game states that are difficult or significant to the agent's learning process.
 
+Game states are generated from an initial random board state, to diversify training. If all game states were generated from the standard initial board state, the model would likely overfit to heuristics during the early stages of the game. It would also not train well on middle-end game stages.
+
 ## Reinforcement Learning
 
 Finally, while the weakly trained model seemed to able to play checkers, it still could't beat ~~me~~ humans. This was likely because my heuristic label was bad, so I had a few options:
@@ -47,7 +49,7 @@ Thus, I chose reinforcement learning, in which I would just have the model learn
 
 Interestingly, while my heuristic labels were crafted to create a cautious checkers agent, the reinforcment learning program created a more aggressive agent, suggesting that my heuristic labelling function was poorly designed.
 
-Even so, the reinforcement learning agent could not play very well against ~~me~~ humans, so the [demo](https://havorax.github.io/CheckersBot/) uses a hard-coded *look-ahead decision algorithm*. This is just a duct tape fix and can be improved...
+Even so, the reinforcement learning agent could not play very well against ~~me~~ humans, ~~so the [demo](https://havorax.github.io/CheckersBot/) uses a hard-coded *look-ahead decision algorithm*. This is just a duct tape fix and can be improved...~~ so I retrained the model. It's still far from amazing, but it has improved a little bit.
 
 ## Room for Improvements
 
