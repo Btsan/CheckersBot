@@ -30,17 +30,15 @@
 			</p>
 			<p>
 				<del>The AI demo above and reinforcement learning program do not use any sort of <i>look-ahead</i> algorithm, like <i>MinMax</i>. Otherwise, I fear my laptop would explode.</del>
-				The AI demo above <i>looks-ahead</i> 2 turns, using the <i>MinMax</i> decision algorithm.
-			</p>
-			<p>
-				<a href="https://github.com/Havorax/CheckersBot">Source</a>
+				<del>The AI demo above <i>looks-ahead</i> 2 turns, using the <i>MinMax</i> decision algorithm.</del>
+				No longer uses the simple, but slow, MinMax calculation. Instead, the MLP was retrained.
 			</p>
 		</div>
 	</center>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script>
-	<!-- <script type="text/javascript" src="model.js"></script> -->
-	<!-- <script type="text/javascript" src="checkers.js"></script> -->
-	<script type="text/javascript" src="compressed.js"></script>
+	<script type="text/javascript" src="model.js"></script>
+	<script type="text/javascript" src="checkers.js"></script>
+	<!-- <script type="text/javascript" src="compressed.js"></script> -->
 	<script type="text/javascript">
 		draw_board(board);
 		if (!player) computer_move();
