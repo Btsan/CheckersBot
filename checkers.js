@@ -1,15 +1,15 @@
 var agent = tf.sequential();
-agent.add(tf.layers.dense({units: 32, useBias: true, activation: 'relu', inputShape:[32]}));
+agent.add(tf.layers.dense({units: 64, useBias: true, activation: 'relu', inputShape:[32]}));
+agent.add(tf.layers.dense({units: 32, useBias: true, activation: 'relu'}));
 agent.add(tf.layers.dense({units: 16, useBias: true, activation: 'relu'}));
 agent.add(tf.layers.dense({units: 8, useBias: true, activation: 'relu'}));
-agent.add(tf.layers.dense({units: 4, useBias: true, activation: 'relu'}));
 agent.add(tf.layers.dense({units: 1, useBias: true}));
 agent.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
-agent.layers[0].setWeights([tf.tensor2d(model["w_0"], [32, 32]), tf.tensor1d(model["bias_0"])]);
-agent.layers[1].setWeights([tf.tensor2d(model["w_1"], [32, 16]), tf.tensor1d(model["bias_1"])]);
-agent.layers[2].setWeights([tf.tensor2d(model["w_2"], [16, 8]), tf.tensor1d(model["bias_2"])]);
-agent.layers[3].setWeights([tf.tensor2d(model["w_3"], [8, 4]), tf.tensor1d(model["bias_3"])]);
-agent.layers[4].setWeights([tf.tensor2d(model["w_4"], [4, 1]), tf.tensor1d(model["bias_4"])]);
+agent.layers[0].setWeights([tf.tensor2d(model["w_0"], [32, 64]), tf.tensor1d(model["bias_0"])]);
+agent.layers[1].setWeights([tf.tensor2d(model["w_1"], [64, 32]), tf.tensor1d(model["bias_1"])]);
+agent.layers[2].setWeights([tf.tensor2d(model["w_2"], [32, 16]), tf.tensor1d(model["bias_2"])]);
+agent.layers[3].setWeights([tf.tensor2d(model["w_3"], [16, 8]), tf.tensor1d(model["bias_3"])]);
+agent.layers[4].setWeights([tf.tensor2d(model["w_4"], [8, 1]), tf.tensor1d(model["bias_4"])]);
 
 var board = [[0, 1, 0, 1, 0, 1, 0, 1],
 			 [1, 0, 1, 0, 1, 0, 1, 0],
@@ -270,10 +270,27 @@ function has_capture(targ){
 function computer_move(){
 	try{
 		var boards = generate_next(board); // array of board tensors
+		if (ai_pcs(board) < 6){ // play more careful at the end
+			var min = capturable(boards[0]);
+			for (var i = 1; i < boards.length; ++i){
+				var temp_min = capturable(boards[i]);
+				if ((temp_min) < min){
+					min = temp_min;
+					i = 0;
+				}
+				else if (temp_min == min){
+					continue;
+				}
+				else{
+					boards.splice(i, 1);
+					i -= 1;
+				}
+			}
+		}
 		var next = {score: 0, index: 0};
-		next.score = agent.predict(reverse(boards[0]));
+		next.score = agent.predict(minmax(to_board(reverse(minmax(to_board(reverse(boards[0])))))));
 		for (var i = 1; i < boards.length; ++i){
-			var score = agent.predict(reverse(boards[i]));
+			var score = agent.predict(minmax(to_board(reverse(minmax(to_board(reverse(boards[i])))))));
 			if (score >= next.score){
 				next.score = score;
 				next.index = i;
