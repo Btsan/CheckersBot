@@ -65,7 +65,7 @@ Another possible improvement is the usage of a convolutional neural network, ins
 
 *disclaimer: there are tools that can easily port a trained model into tensorflow.js, but I'm usng copy-paste*
 
-While I think the MLP model actually works quite well (up to a point) and could possibly encode the good responses to all of game states it'd take a large (impossibly so) network very long to reach that level. A convolutional neural network would generalize the board state and train an agent to achieve a high gameplay level sooner than an MLP agent.
+While I think the MLP model actually works quite well (up to a point) and could possibly encode the good responses to all of game states it'd take a large (impossibly so) network very long (impossibly so) to reach that level. A convolutional neural network would generalize the board state and train an agent to achieve a high gameplay level sooner than an MLP agent.
 
 ## Tools Used
 
