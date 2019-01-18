@@ -39,15 +39,15 @@ Finally, while the weakly trained model seemed to able to play checkers, it stil
   <li>Reinforcement learning</li>
 </ul>
 
-Manual readjustment of heuristics could take a long time and I wouldn't claim to have the checkers expertise to do so confidently.
+Manual readjustment of heuristics would be easier if I were a checkers expert. I'm not.
 
-Policy searching algorithms ~~could~~ very likely would take a long time and there might not be enough search dimensions to find a decent gameplay policy.
+Policy searching algorithms might not have enough dimensions to find a decent gameplay policy in.
 
-Thus, I chose reinforcement learning, in which I would just have the model learn to beat itself, repeatedly improving. The implemented algorithm uses *epsilon-greedy exploration* and rewards the agent for winning and lightly punishes drawing.
+Thus, I chose reinforcement learning. The implemented algorithm uses *epsilon-greedy exploration* and rewards actions that lead to a win. Very simple to conceive and implement.
 
 ## Result
 
-Interestingly, while my heuristic labels were crafted with a cautious checkers agent in mind, the reinforcment learning program created a more aggressive agent, suggesting that my it's bad to be over cautious.
+Interestingly, while my heuristic labels were crafted with a cautious checkers agent in mind, the reinforcment learning program created a more aggressive agent, suggesting that it's bad to be over cautious.
 
 Even so, the reinforcement learning agent could not play very well against ~~me~~ humans, so the [demo](https://Btsan.github.io/CheckersBot/) uses a hard-coded *look-ahead decision algorithm*. This is just a duct tape fix and can be improved...
 
