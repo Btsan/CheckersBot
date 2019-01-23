@@ -63,7 +63,7 @@ Also, there are more efficient look-ahead algorithms (read heuristic tree search
 ##### Convolutions
 Another possible improvement is the usage of a convolutional neural network, instead of the multi-layer perceptron. However, a CNN separates its weights in filters, unlike the fully connected MLP, so it would be hard to port the trained model into my JavaScript code. 
 
-*disclaimer: there are tools that can easily port a trained model into tensorflow.js, but I'm usng copy-paste*
+*disclaimer: there are tools that can easily port a trained model into tensorflow.js, but I'm using copy-paste*
 
 While I think the MLP model actually works quite well (up to a point) and could possibly encode the good responses to all of game states it'd take a large (impossibly so) network very long (impossibly so) to reach that level. A convolutional neural network would generalize the board state and train an agent to achieve a high gameplay level sooner than an MLP agent.
 
